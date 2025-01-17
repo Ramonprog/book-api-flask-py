@@ -28,8 +28,10 @@ def get_all_books():
    books = Book.query.all()
    return jsonify([books.to_dict() for books in books]), 200
 
-
-
+@app.route('/books/<book_id>', methods=['GET'])
+def get_one_book(book_id):
+   book = Book.query.get_or_404(book_id)
+   return jsonify(book.to_dict())
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080, host='0.0.0.0')
