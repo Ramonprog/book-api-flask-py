@@ -24,9 +24,12 @@ def add_book():
    return jsonify({'message': 'Book added successfully'}), 201
 
 @app.route('/books', methods=['GET'])
-def get_books():
+def get_all_books():
    books = Book.query.all()
-   return jsonify({'books': books}), 200
+   return jsonify([books.to_dict() for books in books]), 200
+
+
+
 
 if __name__ == '__main__':
     app.run(debug=True, port=8080, host='0.0.0.0')
