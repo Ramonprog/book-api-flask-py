@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_migrate import Migrate
 from db import db
+from models.book import Book
 
 app = Flask(__name__)
 
@@ -21,5 +22,9 @@ if __name__ == '__main__':
 """
 comandos para iniciar o banco de dados
 flask db init
-flask db migrate
+flask db migrate -m 'nome da migração'
+
+depois do migration ele entende que tem um modelo e tem que fazer o upgrade
+para fazer a transação
+flask db upgrade
 """
