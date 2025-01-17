@@ -33,6 +33,17 @@ def get_one_book(book_id):
    book = Book.query.get_or_404(book_id)
    return jsonify(book.to_dict())
 
+@app.route('/books/<book_id>', methods=['PATCH'])
+def update_book(book_id):
+  book = Book.query.get_or_404(book_id)
+  data = request.get_json()
+  for key, value in data.items():
+      setattr(book, key, value)
+
+  db.session.commit()
+    
+  return jsonify({'message': 'Livro atualizado com sucesso'})
+
 if __name__ == '__main__':
     app.run(debug=True, port=8080, host='0.0.0.0')
 
